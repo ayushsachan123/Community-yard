@@ -1,0 +1,89 @@
+<%- layout('layouts/boilerplate') %>
+    <% if(user !==null) {%>
+        <div id="top"></div>
+        <div class="flex flex-x">
+            <form method="POST" action="/websiteReport">
+                <div class="bg-light rounded h-100 p-4">
+                    <h6 class="mb-4">Report Malfunction/Request for update</h6>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" name="website_url" id="website_url" placeholder="Website url" required>
+                        <label for="Name">Website URL</label>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <select class="form-select" aria-label="Type of Report" name="report_type" required>
+                            <option selected disabled>Select the type of change</option>
+                            <option value="Error">Error</option>
+                            <option value="Update">Update</option>
+                            <option value="Add">Add</option>
+                        </select>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <textarea class="form-control" placeholder="Product Description" id="Desc" name="Desc" style="height: 150px;"></textarea>
+                        <label for="Desc">Brief Description of Change/Error:</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="hidden" class="form-control" name="email" id="email" value="<%= user.email %>">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <div class="form-floating mb-3">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <% }else{%>
+            <blockquote class="blockquote">
+                <h4 class="text-center" style="margin-top: 20px;">Login To Report Malfunction/Request for update</h4>
+            </blockquote>
+            <% } %>
+
+                <div class="container-fluid pt-4 px-4">
+                    <h3>Websites Under Maintenance:</h3>
+                    <div class="row g-4">
+                        <% websites.forEach(function(website){%>
+                            <div class="col-sm-12 col-xl-6 advert">
+                                <div class="bg-light text-center rounded p-4">
+                                    <div class="d-flex align-items-center justify-content-between mb-4">
+                                        <h6 class="mb-0">
+                                            <a href="https://<%= website.website_url %>" target="_blank">
+                                                <%= website.website_url %>
+                                            </a>
+                                        </h6>
+                                        <div style="margin-left:16px;overflow: hidden;text-overflow: ellipsis;">
+                                            <h6>Reported by-</h6>
+                                            <%= website.email %>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center justify-content-between mb-4">
+                                        <div class="mb-0">
+                                            Description:<br>
+                                            <h6>
+                                                <%=website.error_description %>
+                                            </h6>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center justify-content-between mb-4">
+                                        <div>
+                                            <h6 class="mb-0">
+                                                Submitted on:<br>
+                                                <%=website.date.toLocaleString('en-IN') %>
+                                            </h6>
+                                        </div>
+                                        <div>
+                                            Reported type:
+                                            <h6>
+                                                <%= website.report_type %>
+                                            </h6>
+                                        </div>
+                                        <div style="margin-left: 16px;">
+                                            <form method="POST" action="/deleteStatus">
+                                                <input type="text" name="id" value="<%= website._id %>" hidden />
+                                                <button type="submit" class="btn btn-info">Delete</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <%})%>
+                    </div>
+                </div>

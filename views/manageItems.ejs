@@ -1,0 +1,84 @@
+<%- layout('layouts/boilerplate') %>
+    <div id="top"></div>
+
+    <div class="d-flex align-items-center justify-content-between mb-4 pt-4 px-4">
+
+        <div class="ms-3">
+            <p class="mb-2">Advertisements</p>
+        </div>
+        <div class="col-sm-6 col-xl-3">
+            <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                <i class="fa text-primary">Sort by</i>
+                <div class="ms-3">
+                    <select name="Sort" id="sortby">
+                    <option value="price">Price</option>
+                    <option value="pricedesc">Price Descending</option>
+                    <option value="recent">Date</option>
+                </select>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- Sale & Revenue End -->
+
+    <!-- Advertisements -->
+    <div class="container-fluid pt-4 px-4 col">
+        <div class="row g-4">
+            <% if(items.length===0) { %>
+                <div class="col-sm-12 col-xl-6 advert">
+                    <div class="bg-light text-center rounded p-4">
+                        <div class="d-flex align-items-center justify-content-between mb-4">
+                            <h6 class="mb-0">No Items to Show</h6>
+
+                        </div>
+                    </div>
+                    <% } %>
+
+                        <% items.forEach(function(item){%>
+                            <div class="col-sm-12 col-xl-6 advert">
+                                <!--Advertise block-->
+                                <div class="bg-light text-center rounded p-4">
+                                    <div class="d-flex align-items-center justify-content-between mb-4">
+                                        <h6 class="mb-0">
+                                            <%= item.item_name %>
+                                        </h6>
+                                        <div>
+                                            <h6>Ad by-</h6>
+                                            <a href="">
+                                                <%= item.person_name %>
+                                            </a>
+                                            </h6>
+                                        </div>
+                                    </div>
+                                    <% if (item.upload != '') { %>
+                                        <!-- <p class="form-label mx-4"> Vaccination Proof </p>
+                            <div id="file-div" class="px-3 py-3"> -->
+                                        <embed type="<%= item.uploadType %>" src="<%= item.upload %>" class="mx-auto d-block<% if (/image\/.*/.test(item.uploadType)) {%> img-fluid <% } %>" />
+                                </div>
+                                <% } %>
+                                    <div class="d-flex align-items-center justify-content-between mb-4">
+                                        <h6 class="mb-0">
+                                            <%=item.item_description  %>
+                                        </h6>
+                                    </div>
+                                    <div class="d-flex align-items-center justify-content-between mb-4">
+                                        <h6 class="mb-0">Price:
+                                            <%=item.item_price  %>
+                                        </h6>
+                                        <h6 class="mb-0">Phone :
+                                            <%=item.person_contact  %>
+                                        </h6>
+                                        <form method="POST" action="/deleteAd">
+                                            <input type="text" name="item_name" value="<%= item.item_name %>" hidden/>
+                                            <input type="text" name="owner_email" value="<%= item.owner_email %>" hidden/>
+                                            <input type="text" name="buyer_email" value="<%= user.email %>" hidden/>
+                                            <button type="submit" class="btn btn-info">Delete</button>
+                                        </form>
+                                    </div>
+                            </div>
+                </div>
+                <%})%>
+        </div>
+    </div>
+    <!-- Advertisements end -->

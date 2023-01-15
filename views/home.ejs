@@ -1,0 +1,45 @@
+<%- layout('layouts/boilerplate') %>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-md-6 col-xl-4">
+            <div class=" rounded p-4">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                    <h6 class="mb-0">Messages</h6>
+                </div>
+                <% chats.forEach(function(single_item_chat){%>
+                <!--for loop-->
+
+                <% if(single_item_chat.chats.length!==0){%>
+                <div>
+                    Item: <h5><%= single_item_chat.item_name %></h5>
+                </div>
+                <% single_item_chat.chats.forEach(function(individual,i){ %>
+                <div class="d-flex align-items-center border-bottom py-3">
+                    <img class="rounded-circle flex-shrink-0" src="img/user.jpg" alt=""
+                        style="width: 40px; height: 40px;">
+                    <div class="w-100 ms-3">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h6 class="mb-0"><%= individual.buyer_email %> </h6>
+                        </div>
+                        <span>
+                            <form class="form-group input-group w-100" action="/chatWithBuyer" method="POST">
+                                <input type="text" name="item_name" value="<%= single_item_chat.item_name %>" hidden />
+                                <input type="text" name="owner_email" value="<%= user.email %>" hidden />
+                                <input type="text" name="buyer_email" value="<%= individual.buyer_email %>" hidden />
+                                <div class="form-group w-100">
+                                    <div style="margin-top:16px;margin-bottom:16px;"><h6><%= individual.msg[individual.msg.length-1].conv %></h6></div>
+                                    <button type="submit" class="btn btn-primary btn-flat">Go to Buyer's chat</button>
+                                </div>
+                            </form>
+                            <span> <%# individual.msg[individual.msg.length-1].conv %> </span>
+                        </span>
+                    </div>
+                </div>
+            
+            <% }) %>
+            <% } %>
+        </div>
+        </div>
+        <% }) %>
+    </div>
+</div>
