@@ -31,7 +31,7 @@
 1. <h3 style="color:cyan;">Barter or Sell old goods.</h3>
     <span style="color:#14c759;">Have a book from previous sem? Plan on selling to 'kabadi'? we got the solution, trade it with your juniors or donate it to college community at our website!</span>
 2. <h3 style="color:cyan;">College Website Report System.</h3>
-    <span style="color:#14c759;">College website down? Report it directly to SAIC Members.<br>Part of dev team? Contact SAIC members to update or deploy your website.</span>
+    <span style="color:#14c759;">College website down? Report it directly to club Members.<br>Part of dev team? Contact club members to update or deploy your website.</span>
 3. <h3 style="color:cyan;">Chat with buyers or sellers, bargain  to a best exchange or   price.</h3>
     <span style="color:#14c759;">Settle at your best suited price, No compromises. Want to exchange your old Basic Elelctrical Engineering book for some cool stuff? we got you</span>
 4. <h3 style="color:cyan;">Sick of swithching tabs, get all links at one place.</h3>
